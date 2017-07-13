@@ -4,8 +4,7 @@
     <input type="checkbox" 
       @click="changeShowTable">
     <component 
-      :is='currentCategoryView'
-      :categories='categories'>
+      :is='currentCategoryView'>
     </component>
   </div>
 </template>

@@ -5,7 +5,6 @@
       @click="changeShowTable">
     <component 
       :is='currentCategoryView'
-      @selectcategory='onSelectCategory'
       :categories='categories'>
     </component>
   </div>
@@ -14,15 +13,12 @@
 <script>
 import CategoriesUl from './components/CategoriesUl.vue'
 import CategoriesTable from './components/CategoriesTable.vue'
-import axios from 'axios'
-
 
 export default {
   name: 'app',
   data () {
     return {
-      showTable: false,
-      categories: []
+      showTable: false
     }
   },
   computed: {
@@ -33,19 +29,7 @@ export default {
   methods: {
     changeShowTable() {
       this.showTable = !this.showTable
-    },
-     onSelectCategory (category) {
-      category.selected = !category.selected
     }
-  },
-
-  mounted: function () {
-    var url = 'https://raw.githubusercontent.com/jesuslerma/vuejs101-guide/master/categories.json'
-    var that = this
-
-    axios.get(url).then(function (response) {
-      that.categories = response.data
-    })
   },
 
   components: {

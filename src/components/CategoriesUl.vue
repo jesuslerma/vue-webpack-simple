@@ -11,7 +11,7 @@
 </template>
 <script >
   import CategoryLi from './CategoryLi.vue'
-    import { listMixin } from '../mixins/CategoriesMixin'
+  import { listMixin } from '../mixins/CategoriesMixin'
 
   export default {
     mixins: [listMixin],

@@ -1,6 +1,8 @@
 <template>
   <ul>
-    <li v-for='category in categories'>
+    <li
+      @click='selectCategory(category)' 
+      v-for='category in categories'>
       <category-li
         :name='category.name'
         :selected='category.selected'></category-li>
@@ -9,9 +11,10 @@
 </template>
 <script >
   import CategoryLi from './CategoryLi.vue'
+    import { listMixin } from '../mixins/CategoriesMixin'
 
   export default {
-    props: ['categories'],
+    mixins: [listMixin],
     components: {
       categoryLi: CategoryLi
     }

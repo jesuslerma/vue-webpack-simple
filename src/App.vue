@@ -3,31 +3,54 @@
     Mostrar Categorias en Tabla 
     <input type="checkbox" 
       @click="changeShowTable">
-    <categories-ul :categories='categories'></categories-ul>
+    <component 
+      :is='currentCategoryView'
+      @selectcategory='onSelectCategory'
+      :categories='categories'>
+    </component>
   </div>
 </template>
 
 <script>
 import CategoriesUl from './components/CategoriesUl.vue'
-var categories = [
-  { name: 'clothing', selected: false }
-]
+import CategoriesTable from './components/CategoriesTable.vue'
+import axios from 'axios'
+
 
 export default {
   name: 'app',
   data () {
     return {
       showTable: false,
-      categories
+      categories: []
+    }
+  },
+  computed: {
+    currentCategoryView () {
+      return this.showTable ? 'categoriesTable' : 'categoriesUl'
     }
   },
   methods: {
     changeShowTable() {
       this.showTable = !this.showTable
+    },
+     onSelectCategory (category) {
+      category.selected = !category.selected
     }
   },
+
+  mounted: function () {
+    var url = 'https://raw.githubusercontent.com/jesuslerma/vuejs101-guide/master/categories.json'
+    var that = this
+
+    axios.get(url).then(function (response) {
+      that.categories = response.data
+    })
+  },
+
   components: {
-    categoriesUl: CategoriesUl
+    categoriesUl: CategoriesUl,
+    categoriesTable: CategoriesTable
   }
 }
 </script>
